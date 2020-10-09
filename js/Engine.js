@@ -67,7 +67,43 @@ class Engine {
 
   // This method is not implemented correctly, which is why
   // the burger never dies. In your exercises you will fix this method.
-  isPlayerDead = () => {
-    return false;
-  };
+  isPlayerDead = () => {     
+
+    let result = null;
+    const endGame = this.enemies.map((enemy) =>   {
+   
+let enemyTop= enemy.y;
+let enemyBottom = enemy.y + ENEMY_HEIGHT;    
+let enemyLeft =  enemy.x;
+let enemyRight =  enemy.x + ENEMY_WIDTH;
+
+let playerTop = GAME_HEIGHT - (PLAYER_HEIGHT -10);  
+let playerBottom = GAME_HEIGHT -10; 
+let playerLeft = this.player.x
+let playerRight = this.player.x + PLAYER_WIDTH; 
+
+if(enemyBottom < playerTop ||
+  enemyRight < playerLeft || 
+  enemyLeft > playerRight) { 
+    return true;
+    result = enemy;
+  } 
+    
+       
+     });
+   return result;
+
+    
+
+
+
+ // console.log(); 
+  
+    } 
 }
+   
+  
+ 
+
+    
+

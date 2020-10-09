@@ -57,8 +57,14 @@ class Engine {
     // We check if the player is dead. If he is, we alert the user
     // and return from the method (Why is the return statement important?)
     if (this.isPlayerDead()) {
-      window.alert('Game over');
-      return;
+      // document.getElementById('backgroundMusic').pause(); 
+      window.alert( 
+   `[GAME OVER]   
+
+  Play again ?`);  
+      location.reload();
+
+
     }
 
     // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
@@ -67,43 +73,29 @@ class Engine {
 
   // This method is not implemented correctly, which is why
   // the burger never dies. In your exercises you will fix this method.
-  isPlayerDead = () => {     
+  isPlayerDead = () => {
+    for (let i = 0; i < this.enemies.length; i++) {
+      let enemy = this.enemies[i];
 
-    let result = null;
-    const endGame = this.enemies.map((enemy) =>   {
-   
-let enemyTop= enemy.y;
-let enemyBottom = enemy.y + ENEMY_HEIGHT;    
-let enemyLeft =  enemy.x;
-let enemyRight =  enemy.x + ENEMY_WIDTH;
+      let enemyTop = enemy.y;
+      let enemyBottom = enemy.y + ENEMY_HEIGHT;
+      let enemyLeft = enemy.x;
+      let enemyRight = enemy.x + ENEMY_WIDTH;
 
-let playerTop = GAME_HEIGHT - (PLAYER_HEIGHT -10);  
-let playerBottom = GAME_HEIGHT -10; 
-let playerLeft = this.player.x
-let playerRight = this.player.x + PLAYER_WIDTH; 
+      let playerTop = GAME_HEIGHT - (PLAYER_HEIGHT - 10);
+      let playerBottom = GAME_HEIGHT - 10;
+      let playerLeft = this.player.x;
+      let playerRight = this.player.x + PLAYER_WIDTH;
 
-if(enemyBottom < playerTop ||
-  enemyRight < playerLeft || 
-  enemyLeft > playerRight) { 
-    return true;
-    result = enemy;
-  } 
-    
-       
-     });
-   return result;
+      if (
+        enemyBottom > playerTop &&
+        enemyRight > playerLeft &&
+        enemyLeft < playerRight
+      ) {
+        return true;
+      }
+    }
 
-    
-
-
-
- // console.log(); 
-  
-    } 
+    // console.log();
+  };
 }
-   
-  
- 
-
-    
-

@@ -4,8 +4,7 @@
 class Engine {
   // The constructor has one parameter. It will refer to the DOM node that we will be adding everything to.
   // You need to provide the DOM node when you create an instance of the class
-  constructor(theRoot) { 
-   
+  constructor(theRoot) {
     // We need the DOM element every time we create a new enemy so we
     // store a reference to it in a property of the instance.
     this.root = theRoot;
@@ -14,7 +13,7 @@ class Engine {
     this.player = new Player(this.root);
     // Initially, we have no enemies in the game. The enemies property refers to an array
     // that contains instances of the Enemy class
-    this.enemies = []; 
+    this.enemies = [];
 
     this.startTime = new Date().getTime();
     // We add the background image to the game
@@ -25,8 +24,8 @@ class Engine {
   //  - Updates the enemy positions
   //  - Detects a collision between the player and any enemy
   //  - Removes enemies that are too low from the enemies array
-  gameLoop = () => { 
-    let currentTime = new Date(). getTime();
+  gameLoop = () => {
+    let currentTime = new Date().getTime();
     let timeGoneBy = currentTime - this.startTime;
     // This code is to see how much time, in milliseconds, has elapsed since the last
     // time this method was called.
@@ -36,9 +35,9 @@ class Engine {
     }
 
     let timeDiff = new Date().getTime() - this.lastFrame;
-    const calculateSpeedIncrease = () => { 
-      return Math.floor(timeGoneBy/5000) * 2;
-    }
+    const calculateSpeedIncrease = () => {
+      return Math.floor(timeGoneBy / 5000) * 2;
+    };
 
     this.lastFrame = new Date().getTime();
     // We use the number of milliseconds since the last call to gameLoop to update the enemy positions.
@@ -64,15 +63,18 @@ class Engine {
 
     // We check if the player is dead. If he is, we alert the user
     // and return from the method (Why is the return statement important?)
-    if (this.isPlayerDead()) {
-      // document.getElementById('backgroundMusic').pause(); 
-      window.alert( 
-   `[GAME OVER]   
+    if (this.isPlayerDead()) { 
+     
+      endGameCat.play();
+     
+      window.alert(
+        `[GAME OVER]   
 
-  Play again ?`);  
-      location.reload();
-
-
+  Play again ?`
+      ); 
+      
+      location.reload(); 
+      backGroundMusic.pause();
     }
 
     // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
